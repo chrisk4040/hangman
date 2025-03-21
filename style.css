@@ -3,3 +3,29 @@ body {
 
    color: rgb(211, 181, 12);
 }
+
+#easy {
+   background-color: darkviolet;
+}
+
+#hard {
+   background-color: darkblue;
+}
+
+#medium {
+   background-color: rgb(230, 150, 76)
+}
+
+.easy {
+   color: darkviolet;
+}
+.hard {
+   color: darkblue;
+}
+.medium {
+   color: rgb(230, 150, 76)
+}
+
+#game {
+   background-color: gray
+}

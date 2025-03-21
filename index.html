@@ -24,25 +24,26 @@
             <div id="difficulty-selection" class="row justify-content-center">
                 <h3>Select Difficulty</h3>
                 <div class="col-auto">
-                    <button class="btn btn-success" onclick="startGame('easy')">Easy</button>
+                    <button class="btn btn-success" id="easy" onclick="startGame('easy')">Easy</button>
 
 
-                    <button class="btn btn-success" onclick="startGame('medium')">Medium</button>
+                    <button class="btn btn-success" id="medium" onclick="startGame('medium')">Medium</button>
 
 
-                    <button class="btn btn-success" onclick="startGame('hard')">Hard</button>
+                    <button class="btn btn-success" id="hard" onclick="startGame('hard')">Hard</button>
                 </div>
             </div>
 
             <div class="row ">
-                <div id="difficulty-box" class="mt-3 p-3 fw-bold">Place holder</div>
+                <div id="difficulty-box" class="mt-3 p-3 fw-bold d-none">Place holder</div>
             </div>
             <!-- Game Area -->
-            <div class="row justify-content-center d-none" id="game">
+            <div class="row justify-content-center d-none mx-3" id="game">
                 <div id="game-area" class="mt-4">
                     <!-- Word Display -->
                     <div class="col-12">
-                        <h2 id="word-display" class="mb-3">_ _ _ _ _ _</h2>
+                        <h2 id="display-word" class="mb-3">_ _ _ _ _ _</h2>
+
                     </div>
                     <!-- Input for Guessing -->
 
@@ -59,7 +60,11 @@
 
                 <div class="col-md-4 text-center">
                     <p id="wrong-letters" class="mb-4">Wrong Guess</p>
+                </div>
+                <div class="col-12">
                     <img id="shamrock" src="" alt="Shamrock" class="shamrock-img mb-4">
+                </div>
+                <div class="col-12 pb-2">
                     <button id="restart-btn" class="btn btn-danger" onclick="restartGame()">Restart Game</button>
                 </div>
 

@@ -16,6 +16,12 @@ const maxMistakes = 6
 function startGame(level){
     selectWord = getRandomWord(level);
 
+//update diff display div
+ updateDifficultyDisplay(level)
+
+ //create place holder for selected word 
+ displayedWord = '_'.repeat(selectWord.length);
+ document.getElementById('display-word').textContent = displayedWord.split('').join(' ');
     //hide diff sleect and show game area
 
     //hide diff
@@ -23,6 +29,7 @@ function startGame(level){
 
     //remove d-npne from difficulty box and game area
     document.getElementById('game').classList.remove('d-none')
+    document.getElementById('difficulty-box').classList.remove('d-none')
     document.getElementById('difficulty-selection').classList.add('d-none')
     //add d-block to #difficultybox
     document.getElementById('difficulty-selection').classList.add('d-none')
@@ -37,5 +44,19 @@ function getRandomWord(level){
 
    }) 
 
+   
    return filWords[Math.floor(Math.random() * filWords.length)];
+
+}
+
+function updateDifficultyDisplay(level){
+    let diffbox = document.getElementById('difficulty-box')
+
+    //remove difficulty class
+    diffbox.classList.remove('easy', 'medium', 'hard')
+
+    //set text and apply class dynamically using template literals
+    diffbox.textContent = `${level.charAt(0).toUpperCase() + level.slice(1)} difficulty`;
+    //apply the appropriate css style for chosen Difficulty
+    diffbox.classList.add(level);
 }
