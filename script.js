@@ -54,6 +54,10 @@ function updateDifficultyDisplay(level){
     diffbox.classList.add(level);
 }
 
+function updateUI() {
+  document.getElementById('display-word').textContent = displayedWord.split('').join('  ') // Show word progress with spaces
+}
+
 function guessLetter(){
     let inputField = document.getElementById('letter-input');
     let guessLetter = inputField.value.toLowerCase();
@@ -84,45 +88,66 @@ function guessLetter(){
     inputField.focus()
 }
 
-function wrongGuess(guessedLetter){
-    // increment the number of wrong guesses 
-    wrongGuesses++;
+function wrongGuess(guessLetter){ 
+    wrongGuesses++
+    document.getElementById('wrong-letters').textContent += ` ${guessLetter}`
+    //document.getElementById('shamrock').src = `imgs/shamrock${6-wrongGuesses}.jpg`
+  
+    document.getElementById('shamrock').src = `imgs/shamrock${wrongGuesses}.jpg`
 
-    // add guessed letter to the guessed Letters array
-    document.getElementById('wrong-letters').textContent += `${guessedLetter}`
-
-    document.getElementById('shamrock').src = `img/shamrock${6-wrongGuesses}.jpg` // remember to have photos with the same name and file type 
-
-    if(wrongGuesses === maxMistakes){
-        endGame(false)
-    } // check to see if the number of wrong guesses === max mistakes
-}
-
-
-function correctGuess(guessedLetter){
-    let newDisplayedWord = ''
-
-    for (let i = 0; i < selectWord.length; i++) {
-        if(selectWord[i] === guessedLetter){
-            newDisplayedWord += guessedLetter ;
-} else {
-    newDisplayedWord += displayedWord[i];
-}
-}
-
-displayedWord = newDisplayedWord;
-document.getElementById('display-word').textContent = displayedWord;
-.split('')
-.join(' ')
-}
-
-function endGame(won){
-    if (won === true){
-      setTimeout(() => alert('yeay you won'), 100)
-    }else {
+    if (wrongGuesses === maxMistakes){
+      endGame(lost)
     }
   }
+  
+function correctGuess(guessLetter){
 
-  function restartGame(){
-    location.reload()
+    let newDisplayedWord =''
+  
+    for (let i=0; i < selectWord.length; i++){
+      if (selectWord[i] === guessLetter){
+        newDisplayedWord += guessLetter // Replace underscore with correct letter
+      }else{
+      newDisplayedWord += displayedWord[i] // Keep existing correct letters
+      }
+    }
+  
+    displayedWord = newDisplayedWord
+    updateUI()
+  
+    //  Check if the player has guessed all letters
+    if (!displayedWord.includes('_')) {
+      endGame(true)
+    }
+  
+  }
+  
+  function endGame(won, lost){
+    let message = won
+    if (message === won){
+      alert('you have won good job')
+    } if (message ===lost){
+      alert(`you have lost better luck next time the word was ${displayedWord}`)
+    }
+  setTimeout(() => alert(message), 100); // Display alert after short delay
+  setTimeout(() => resetGame(), 500)
+  }
+  
+  // Reset Game - Resets all game variables and UI elements to return to home page
+  function resetGame() {
+    selectWord = '';
+    displayedWord = '';
+    wrongGuesses = 0;
+    guessLetters = [];
+    
+    // Update the displayed word to show underscores
+    document.getElementById('display-word').textContent = '_'.repeat(selectWord.length).split('').join(' ');
+
+    // Clear wrong letters display
+    document.getElementById('wrong-letters').textContent = '';
+    document.getElementById('letter-input').value = '';
+    document.getElementById('letter-input').focus();
+    document.getElementById('game').classList.add('d-none');
+    document.getElementById('difficulty-selection').classList.remove('d-none');
+    document.getElementById('difficulty-box').classList.add('d-none')
   }
