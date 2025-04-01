@@ -12,7 +12,8 @@ let displayedWord = '';
 let wrongGuesses = 0;
 let guessLetters = []
 const maxMistakes = 6 
-
+let gameWonC= 0
+let gameLostC = 0
 function startGame(level){
     selectWord = getRandomWord(level);
 
@@ -133,6 +134,15 @@ function correctGuess(guessLetter){
   setTimeout(() => resetGame(), 500)
   }
   
+  // Add event listener for letter input
+  document.getElementById('letter-input').addEventListener('keydown', (e) => {
+    // Check if the pressed key is a valid letter (a-z)
+    if (e.key.match(/^[a-z]$/)) {
+      e.preventDefault(); // Prevent the default action (e.g., typing the letter)
+      guessLetter(); // Call the existing function to handle the guess
+    }
+  });
+
   // Reset Game - Resets all game variables and UI elements to return to home page
   function resetGame() {
     selectWord = '';
@@ -150,4 +160,18 @@ function correctGuess(guessLetter){
     document.getElementById('game').classList.add('d-none');
     document.getElementById('difficulty-selection').classList.remove('d-none');
     document.getElementById('difficulty-box').classList.add('d-none')
+  }
+
+  function playcsound(correctGuess) {
+    if (correctGuess) {
+      let audio = new Audio('Correct Answer sound effect-yt.savetube.me.mp3');
+      audio.play();
+    }
+  }
+
+  function playwsound(wrongGuess) {
+    if (wrongGuess) {
+      let audio = new Audio('793222__cvltiv8r__monologue-with-dl4-split-474.wav');
+      audio.play();
+    }
   }
