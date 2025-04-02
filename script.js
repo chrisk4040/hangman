@@ -14,6 +14,10 @@ let guessLetters = []
 const maxMistakes = 6 
 let gameWonC= 0
 let gameLostC = 0
+let cA = document.getElementById('audio2')
+let wA = document.getElementById('audio1')
+
+
 function startGame(level){
     selectWord = getRandomWord(level);
 
@@ -93,7 +97,8 @@ function wrongGuess(guessLetter){
     wrongGuesses++
     document.getElementById('wrong-letters').textContent += ` ${guessLetter}`
 
-    document.getElementById('shamrock').src = `imgs/shamrock${wrongGuesses}.jpg`
+    document.getElementById('shamrock').src = `imgs/robot${wrongGuesses}.jpg`
+    wA.play()
 
     if (wrongGuesses === maxMistakes){
       endGame(false, true) // Pass false for won and true for lost
@@ -111,7 +116,7 @@ function correctGuess(guessLetter){
       newDisplayedWord += displayedWord[i] // Keep existing correct letters
       }
     }
-
+    cA.play()
     displayedWord = newDisplayedWord
     updateUI()
 
@@ -156,16 +161,4 @@ function resetGame() {
     document.getElementById('difficulty-box').classList.add('d-none')
 }
 
-function playcsound(correctGuess) {
-    if (correctGuess) {
-      let audio = new Audio('Correct Answer sound effect-yt.savetube.me.mp3');
-      audio.play();
-    }
-}
 
-function playwsound(wrongGuess) {
-    if (wrongGuess) {
-      let audio = new Audio('793222__cvltiv8r__monologue-with-dl4-split-474.wav');
-      audio.play();
-    }
-}
