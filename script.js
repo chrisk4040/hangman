@@ -92,19 +92,18 @@ function guessLetter(){
 function wrongGuess(guessLetter){ 
     wrongGuesses++
     document.getElementById('wrong-letters').textContent += ` ${guessLetter}`
-    //document.getElementById('shamrock').src = `imgs/shamrock${6-wrongGuesses}.jpg`
-  
+
     document.getElementById('shamrock').src = `imgs/shamrock${wrongGuesses}.jpg`
 
     if (wrongGuesses === maxMistakes){
-      endGame(lost)
+      endGame(false, true) // Pass false for won and true for lost
     }
-  }
+}
   
 function correctGuess(guessLetter){
 
     let newDisplayedWord =''
-  
+
     for (let i=0; i < selectWord.length; i++){
       if (selectWord[i] === guessLetter){
         newDisplayedWord += guessLetter // Replace underscore with correct letter
@@ -112,39 +111,34 @@ function correctGuess(guessLetter){
       newDisplayedWord += displayedWord[i] // Keep existing correct letters
       }
     }
-  
+
     displayedWord = newDisplayedWord
     updateUI()
-  
+
     //  Check if the player has guessed all letters
     if (!displayedWord.includes('_')) {
-      endGame(true)
+      endGame(true, false) // Pass true for won and false for lost
     }
+}
   
-  }
-  
-  function endGame(won, lost){
-    let message = won
-    if (message === won){
-      alert('you have won good job')
-    } if (message ===lost){
-      alert(`you have lost better luck next time the word was ${displayedWord}`)
+function endGame(won, lost){
+    if (won) {
+      alert('You have won! Good job!');
+      gameWonC++; // Increment win counter
+    } else if (lost) {
+      alert(`You have lost. Better luck next time! The word was ${selectWord}`);
+      gameLostC++; // Increment loss counter
     }
-  setTimeout(() => alert(message), 100); // Display alert after short delay
-  setTimeout(() => resetGame(), 500)
-  }
-  
-  // Add event listener for letter input
-  document.getElementById('letter-input').addEventListener('keydown', (e) => {
-    // Check if the pressed key is a valid letter (a-z)
-    if (e.key.match(/^[a-z]$/)) {
-      e.preventDefault(); // Prevent the default action (e.g., typing the letter)
-      guessLetter(); // Call the existing function to handle the guess
-    }
-  });
 
-  // Reset Game - Resets all game variables and UI elements to return to home page
-  function resetGame() {
+    // Update the UI for wins and losses
+    document.getElementById('Wins').textContent = `Wins: ${gameWonC}`;
+    document.getElementById('losses').textContent = `Losses: ${gameLostC}`;
+
+    setTimeout(() => resetGame(), 500);
+}
+
+// Reset Game - Resets all game variables and UI elements to return to home page
+function resetGame() {
     selectWord = '';
     displayedWord = '';
     wrongGuesses = 0;
@@ -160,18 +154,18 @@ function correctGuess(guessLetter){
     document.getElementById('game').classList.add('d-none');
     document.getElementById('difficulty-selection').classList.remove('d-none');
     document.getElementById('difficulty-box').classList.add('d-none')
-  }
+}
 
-  function playcsound(correctGuess) {
+function playcsound(correctGuess) {
     if (correctGuess) {
       let audio = new Audio('Correct Answer sound effect-yt.savetube.me.mp3');
       audio.play();
     }
-  }
+}
 
-  function playwsound(wrongGuess) {
+function playwsound(wrongGuess) {
     if (wrongGuess) {
       let audio = new Audio('793222__cvltiv8r__monologue-with-dl4-split-474.wav');
       audio.play();
     }
-  }
+}
