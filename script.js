@@ -63,6 +63,14 @@ function updateUI() {
   document.getElementById('display-word').textContent = displayedWord.split('').join('  ') // Show word progress with spaces
 }
 
+// Add event listener for Enter key on input field
+document.getElementById('letter-input').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        guessLetter();
+        event.preventDefault();
+    }
+});
+
 function guessLetter(){
     let inputField = document.getElementById('letter-input');
     let guessLetter = inputField.value.toLowerCase();
@@ -151,7 +159,7 @@ function resetGame() {
     
     // Update the displayed word to show underscores
     document.getElementById('display-word').textContent = '_'.repeat(selectWord.length).split('').join(' ');
-
+      document.getElementById('shamrock').src = ``
     // Clear wrong letters display
     document.getElementById('wrong-letters').textContent = '';
     document.getElementById('letter-input').value = '';
