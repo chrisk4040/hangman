@@ -24,17 +24,13 @@
                 <div class="col-auto" id="losses">Losses</div>
             </div>
 
-            <div id="difficulty-selection" class="row justify-content-center">
+            <div id="difficulty-selection" class="row justify-content-center text-center">
                 <h3>Select Difficulty</h3>
-                <div class="col-auto">
-                    <button class="btn btn-success btn-outline-dark" id="easy" onclick="startGame('easy')">Easy</button>
 
-                    <button class="btn btn-success btn-outline-dark" id="medium"
-                        onclick="startGame('medium')">Medium</button>
+                <div class="col-auto px-1"> <button id="easy" onclick="startGame('easy')">EASY</button></div>
+                <div class="col-auto px-1"> <button id="medium" onclick="startGame('medium')">MEDIUM</button></div>
+                <div class="col-auto px-1"><button id="hard" onclick="startGame('hard')">HARD</button></div>
 
-
-                    <button class="btn btn-success btn-outline-dark" id="hard" onclick="startGame('hard')">Hard</button>
-                </div>
             </div>
 
             <div class="row ">
@@ -56,8 +52,7 @@
                                 placeholder="Guess Letter">
                         </div>
                         <div class="col-auto">
-                            <button id="guess-btn" class="btn btn-primary btn-outline-dark"
-                                onclick="guessLetter()">Guess</button>
+                            <button id="guess-btn" onclick="guessLetter()">GUESS</button>
                         </div>
                     </div>
                 </div>
@@ -69,8 +64,7 @@
                     <img id="shamrock" src="" alt="Shamrock" class="shamrock-img mb-4">
                 </div>
                 <div class="col-12 pb-2">
-                    <button id="restart-btn" class="btn btn-danger btn-outline-dark" onclick="resetGame()">Restart
-                        Game</button>
+                    <button id="restart-btn" onclick="resetGame()">RESTART</button>
                 </div>
 
             </div>
