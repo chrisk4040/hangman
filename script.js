@@ -97,7 +97,7 @@ function wrongGuess(guessLetter){
     wrongGuesses++
     document.getElementById('wrong-letters').textContent += ` ${guessLetter}`
 
-    document.getElementById('shamrock').src = `imgs/robot${wrongGuesses}.jpg`
+    document.getElementById('shamrock').src = `img/robot.${wrongGuesses}.png`
     wA.play()
 
     if (wrongGuesses === maxMistakes){
